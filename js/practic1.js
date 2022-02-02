@@ -43,6 +43,7 @@ const firstDivRef = document.createElement("div");
 const secondDivRef = document.createElement("div");
 firstDivRef.classList.add("first-div");
 secondDivRef.classList.add("second-div");
+//
 document.querySelector("#root").append(firstDivRef, secondDivRef);
 
 const titleRef = document.createElement("h1");
@@ -53,30 +54,41 @@ addBtnRef.textContent = "Add";
 firstDivRef.append(titleRef, bookList, addBtnRef);
 const linkBookList = document.querySelector("ul");
 
-function renderList() {
+function renderList(books) {
   const markup = books
-    .map(({ title }) => {
-      return `<li>
-        <p>${title}</p>
-        <button type="button">Edit</button>
-        <button type="button">Delete</button>
+    .map(({ title, id }) => {
+      return `<li id = ${id}>
+        <p class = "title-book">${title}</p>
+        <button type="button" class = "btn-edit">Edit</button>
+        <button type="button" class = "btn-del">Delete</button>
         </li>`;
     })
     .join("");
   bookList.insertAdjacentHTML("afterbegin", markup);
+  btnEditRef = document.querySelectorAll(".btn-edit");
+  btnDelRef = document.querySelectorAll(".btn-del");
+  btnEditRef.forEach((item) => {
+    item.addEventListener("click", editBook);
+  });
+  btnDelRef.forEach((item) => {
+    item.addEventListener("click", delBook);
+  });
+  const textRef = document.querySelectorAll(".title-book");
+  textRef.forEach((item) => {
+    item.addEventListener("click", renderPreview);
+  });
 }
-renderList();
 
-function renderBookMarkup({ title, author, img, plot }) {
+renderList(books);
+
+function previewMarkup({ title, author, img, plot }) {
   return `<div>
     <h2>${title}</h2>
     <p>${author}</p>
-    <img scr="${img}" alt="book" width="250px">
+    <img src="${img}" alt="book" width="250px">
     <p>${plot}</p>
     </div>`;
 }
-
-// console.log(renderBookMarkup(books[0]));
 
 function formMarkup({ title, author, img, plot }) {
   return `<form action="">
@@ -100,4 +112,21 @@ function formMarkup({ title, author, img, plot }) {
     </form>`;
 }
 
-// console.log(formMarkup(books[0]));
+function renderPreview(event) {
+  const book = books.find((book) => book.title === event.target.textContent);
+  const markup = previewMarkup(book);
+  secondDivRef.innerHTML = "";
+  secondDivRef.insertAdjacentHTML("beforeend", markup);
+}
+
+function editBook() {
+  console.log("edit");
+}
+
+function delBook(event) {
+  const idElem = event.target.parentNode.getAttribute("id");
+  console.log(idElem);
+  const updaitBook = books.filter((book) => idElem !== book.id);
+  bookList.innerHTML = "";
+  renderList(updaitBook);
+}
