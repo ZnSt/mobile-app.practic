@@ -455,10 +455,161 @@
 
 // console.log(name, tags, locations, avatar, followers, likes, views);
 
-const authors = {
-  kiwi: 4,
-  poly: 6,
-  ajax: 8,
-  mango: 9,
+// const authors = {
+//   kiwi: 4,
+//   poly: 6,
+//   ajax: 8,
+//   mango: 9,
+// };
+
+// const entries = Object.entries(authors);
+// console.log(entries);
+
+// for (const entry of entries) {
+//   const name = entry[0];
+//   const rating = entry[1];
+//   console.log(name, rating);
+// }
+
+// const profile = {
+//   name: "James Brown",
+//   tags: "jjbr",
+//   locations: "Oslo, Norway",
+//   avatar: "links",
+//   stats: {
+//     followers: 5456,
+//     likes: 4578,
+//     views: 5678,
+//   },
+// };
+
+// const { name, tags, locations, ...restProps } = profile;
+// console.log(name, tags, locations);
+// console.log(restProps);
+
+// const showProfileInfo = function ({
+//   name,
+//   tags,
+//   locations,
+//   avatar,
+//   stats: { followers, views, likes },
+// }) {
+//   console.log(name, tags, locations, avatar, followers, views, likes);
+// };
+
+// const profile = {
+//   name: "James Brown",
+//   tags: "jjbr",
+//   locations: "Oslo, Norway",
+//   avatar: "links",
+//   stats: {
+//     followers: 5456,
+//     likes: 4578,
+//     views: 5678,
+//   },
+// };
+
+// showProfileInfo(profile);
+
+// const cart = {
+//   items: [],
+//   getItems() {
+//     return this.items;
+//   },
+//   add(product) {
+//     this.items.push(product);
+//   },
+//   remove(productName) {
+//     const { items } = this;
+//     for (let i = 0; i < items.length; i += 1) {
+//       const item = items[i];
+//       console.log(item);
+
+//       if (productName === item.name) {
+//         console.log("Нашли такой продукт!");
+//         items.splice(i, 1);
+//       }
+//     }
+//   },
+//   clear() {
+//     this.items = [];
+//   },
+//   countTotalPrice() {
+//     let total = 0;
+
+//     for (const item of this.items) {
+//       total += item.price;
+//     }
+//     return total;
+//   },
+//   increaseQuantity(productName) {},
+//   decreaseQuantity(productName) {},
+// };
+
+// cart.add({ name: "apple", price: 50 });
+// cart.add({ name: "lemone", price: 60 });
+// cart.add({ name: "orange", price: 60 });
+// cart.add({ name: "kiwi", price: 110 });
+
+// cart.remove("lemone");
+
+// cart.clear();
+
+// console.log("Total:", cart.countTotalPrice());
+
+// console.table(cart.getItems());
+
+const user = {
+  name: "Mango",
+  age: 14,
+  email: "joshsept@gamil.com",
 };
 
+const vipUsers = Object.keys(user);
+
+vipUsers.status = "VIP";
+vipUsers.hobbies = "HTML";
+vipUsers.days = 320;
+
+// for (const key in user) {
+//   if (user.hasOwnProperty(key)) {
+//     const value = user[key];
+//     console.log(`${key} - ${value}`);
+//   }
+// }
+
+// const apartment = {
+//   descr: "Spacious apartment in the city center",
+//   rating: 4,
+//   price: 2153,
+// };
+// const keys = [];
+// const values = [];
+
+// for (const key in apartment) {
+//   const resultKey = keys.push(key);
+//   const resultValues = values.push(apartment[key]);
+//   console.log(`${resultKey} - ${resultValues}`);
+// }
+const products = [
+  { name: "Radar", price: 1300, quantity: 4 },
+  { name: "Scanner", price: 2700, quantity: 3 },
+  { name: "Droid", price: 400, quantity: 7 },
+  { name: "Grip", price: 1200, quantity: 9 },
+];
+
+function calculateTotalPrice(productName) {
+  // Пиши код ниже этой строки
+  for (const product of products) {
+    if (productName === product.name) {
+      return product.price * product.quantity;
+    }
+  }
+
+  // Пиши код выше этой строки
+}
+calculateTotalPrice("Blaster");
+calculateTotalPrice("Radar");
+calculateTotalPrice("Droid");
+calculateTotalPrice("Grip");
+calculateTotalPrice("Scanner");
